@@ -6,11 +6,14 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: bot-turnos-app
+    links:
+      - mariadb
     restart: always
     ports:
       - "43000:3000"
     volumes:
-      - .:/app
+      - ${PWD}:/app
+      - /app/node_modules
     environment:
       - MYSQL_DB_HOST=mariadb
       - MYSQL_DB_USER=${MYSQL_DB_USER}

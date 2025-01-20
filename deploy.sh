@@ -4,7 +4,7 @@
 ENV_FILE=".env"
 DOCKER_COMPOSE_FILE="docker-compose.yml"
 INDEX_HTML="index.html"
-TARGET_PATH="node_modules/@bot-whatsapp/portal/dist/"
+TARGET_PATH="node_modules/@bot-whatsapp/portal/dist"
 DB_CONTAINER="bot-turnos-db"
 SQL_COMMAND="ALTER TABLE history MODIFY COLUMN refSerialize VARCHAR(255) NULL;"
 
