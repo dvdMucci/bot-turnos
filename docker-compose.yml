@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bot-turnos-app
+    restart: always
+    ports:
+      - "43000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - MYSQL_DB_HOST=mariadb
+      - MYSQL_DB_USER=${MYSQL_DB_USER}
+      - MYSQL_DB_PASSWORD=${MYSQL_DB_PASSWORD}
+      - MYSQL_DB_NAME=${MYSQL_DB_NAME}
+      - MYSQL_DB_PORT=${MYSQL_DB_PORT}
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.6
+    container_name: bot-turnos-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_DB_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DB_NAME}
+      - MYSQL_USER=${MYSQL_DB_USER}
+      - MYSQL_PASSWORD=${MYSQL_DB_PASSWORD}
+    ports:
+      - "43306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
